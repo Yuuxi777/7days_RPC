@@ -40,7 +40,7 @@ type Server struct {
 	serviceMap sync.Map
 }
 
-func (server *Server) register(rcvr interface{}) error {
+func (server *Server) Register(rcvr interface{}) error {
 	s := newService(rcvr)
 	// load service if it exists,otherwise store it
 	if _, dup := server.serviceMap.LoadOrStore(s.name, s); dup {
@@ -50,7 +50,7 @@ func (server *Server) register(rcvr interface{}) error {
 }
 
 func Register(rcvr interface{}) error {
-	return DefaultServer.register(rcvr)
+	return DefaultServer.Register(rcvr)
 }
 
 // NewServer can return a new server
